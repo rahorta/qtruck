@@ -1,40 +1,31 @@
 describe('login', () => {
   it('deve logar no Qtruck com sucesso', () => {
-    cy.visit('/')
-
-    cy.get('input[name=instagram').type('@rodolfo')
-    cy.get('input[name=password').type('1234senha')
-
-    cy.contains('button', 'Entrar').click()
-
-    cy.get('.logged-user')
-    .should('be.visible')
-    .should('have.text', 'Olá, Rodolfo')
+    const user = {
+      name: 'Rodolfo',
+      instagram: '@rodolfo',
+      password: '1234senha'
+    }
+    cy.login(user)
+    cy.loggedUser(user.name)
   })
 
-  it('não deve logar com senha incorreta', () =>{
-    cy.visit('/')
-
-    cy.get('input[name=instagram').type('@rodolfo')
-    cy.get('input[name=password').type('senhaInvalida')
-
-    cy.contains('button', 'Entrar').click()
-
-    cy.get('.swal2-html-container')
-    .should('be.visible')
-    .should('have.text', 'Credenciais inválidas, tente novamente!')
+  it('não deve logar com senha incorreta', () => {
+    const user = {
+      name: 'Rodolfo',
+      instagram: '@rodolfo',
+      password: '123456'
+    }
+    cy.login(user)
+    cy.modalHaveText('Credenciais inválidas, tente novamente!')
   })
 
-  it('não deve logar com instagram incorreto', () =>{
-    cy.visit('/')
-
-    cy.get('input[name=instagram').type('@not-a-user')
-    cy.get('input[name=password').type('123456')
-
-    cy.contains('button', 'Entrar').click()
-
-    cy.get('.swal2-html-container')
-    .should('be.visible')
-    .should('have.text', 'Credenciais inválidas, tente novamente!')
+  it('não deve logar com instagram incorreto', () => {
+    const user = {
+      name: 'Rodolfo',
+      instagram: '@not-a-user',
+      password: '1234senha'
+    }
+    cy.login(user)
+    cy.modalHaveText('Credenciais inválidas, tente novamente!')
   })
 })
