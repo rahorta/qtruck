@@ -1,3 +1,6 @@
+import loginPage from '../support/pages/Login'
+import mapPage from '../support/pages/Map'
+
 describe('login', () => {
   it('deve logar no Qtruck com sucesso', () => {
     const user = {
@@ -5,8 +8,9 @@ describe('login', () => {
       instagram: '@rodolfo',
       password: '1234senha'
     }
-    cy.login(user)
-    cy.loggedUser(user.name)
+
+    loginPage.logar(user)
+    mapPage.loggedUser(user.name)
   })
 
   it('não deve logar com senha incorreta', () => {
@@ -14,8 +18,8 @@ describe('login', () => {
       instagram: '@rodolfo',
       password: '123456'
     }
-    cy.login(user)
-    cy.modalHaveText('Credenciais inválidas, tente novamente!')
+    loginPage.logar(user)
+    loginPage.modal.haveText('Credenciais inválidas, tente novamente!')
   })
 
   it('não deve logar com instagram incorreto', () => {
@@ -23,28 +27,29 @@ describe('login', () => {
       instagram: '@not-a-user',
       password: '1234senha'
     }
-    cy.login(user)
-    cy.modalHaveText('Credenciais inválidas, tente novamente!')
+    loginPage.logar(user)
+    loginPage.modal.haveText('Credenciais inválidas, tente novamente!')
   })
   
   it('instagram deve ser obrigatório', ()=>{
     const user = {
       password: '1234senha'
     }
-    cy.login(user)
-    cy.modalHaveText('Por favor, informe o seu código do Instagram!')
+    loginPage.logar(user)
+    loginPage.modal.haveText('Por favor, informe o seu código do Instagram!')
   })
 
   it('senha deve ser obrigatória', ()=>{
     const user = {
       instagram: '@rodolfo'
     }
-    cy.login(user)
-    cy.modalHaveText('Por favor, informe a sua senha secreta!')
+    loginPage.logar(user)
+    loginPage.modal.haveText('Por favor, informe a sua senha secreta!')
   })
 
   it('todos os campos devem ser obrigatórios', ()=>{
-    cy.login({})
-    cy.modalHaveText('Por favor, informe suas credenciais!')
+    loginPage.go()
+    loginPage.submit()
+    loginPage.modal.haveText('Por favor, informe suas credenciais!')
   })
 })
