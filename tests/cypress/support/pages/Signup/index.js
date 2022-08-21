@@ -1,29 +1,30 @@
 import modal from '../components/Modal'
 
-class LoginPage {
+class SignupPage {
 
     constructor() {
         this.modal = modal
     }
 
     go() {
-        cy.visit('/')
+        cy.visit('/signup')
     }
 
     fillForm(user) {
+        if (user.name) cy.get('input[name=name').type(user.name)
         if (user.instagram) cy.get('input[name=instagram').type(user.instagram)
         if (user.password) cy.get('input[name=password').type(user.password)
     }
 
     submit() {
-        cy.contains('button', 'Entrar').click()
+        cy.contains('button', 'Cadastrar').click()
     }
 
-    logInto(user) {
+    register(user) {
         this.go()
         this.fillForm(user)
         this.submit()
     }
 }
 
-export default new LoginPage()
+export default new SignupPage()

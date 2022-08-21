@@ -9,7 +9,7 @@ describe('login', () => {
       password: '1234senha'
     }
 
-    loginPage.logar(user)
+    loginPage.logInto(user)
     mapPage.loggedUser(user.name)
   })
 
@@ -18,7 +18,7 @@ describe('login', () => {
       instagram: '@rodolfo',
       password: '123456'
     }
-    loginPage.logar(user)
+    loginPage.logInto(user)
     loginPage.modal.haveText('Credenciais inválidas, tente novamente!')
   })
 
@@ -27,7 +27,7 @@ describe('login', () => {
       instagram: '@not-a-user',
       password: '1234senha'
     }
-    loginPage.logar(user)
+    loginPage.logInto(user)
     loginPage.modal.haveText('Credenciais inválidas, tente novamente!')
   })
   
@@ -35,7 +35,7 @@ describe('login', () => {
     const user = {
       password: '1234senha'
     }
-    loginPage.logar(user)
+    loginPage.logInto(user)
     loginPage.modal.haveText('Por favor, informe o seu código do Instagram!')
   })
 
@@ -43,7 +43,7 @@ describe('login', () => {
     const user = {
       instagram: '@rodolfo'
     }
-    loginPage.logar(user)
+    loginPage.logInto(user)
     loginPage.modal.haveText('Por favor, informe a sua senha secreta!')
   })
 
