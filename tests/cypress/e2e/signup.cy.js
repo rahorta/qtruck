@@ -18,15 +18,19 @@ describe('Signup', () => {
         signupPage.modal.haveText('Agora você pode recomendar e/ou avaliar Food trucks.')
 
     })
-})
 
+    it('não deve cadasstrar com instagram duplicado', () => {
+        const user = {
+            name: 'Zidane',
+            instagram: '@zidane',
+            password: '123456'
+        }
 
-Cypress.Commands.add('apiResetUser', (instagram) => {
-    cy.request({
-        url: 'http://localhost:3333/helpers-reset',
-        method: 'DELETE',
-        qs: { instagram: instagram }
-    }).then(response => {
-        expect(response.status).to.eql(204)
+        cy.apiCreateUser(user)
+
+        signupPage.register(user)
+        signupPage.modal.haveText('Instagram já cadastrado!')
     })
 })
+
+
