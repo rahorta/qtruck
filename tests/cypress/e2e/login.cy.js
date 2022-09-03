@@ -2,7 +2,7 @@ import loginPage from '../support/pages/Login'
 import mapPage from '../support/pages/Map'
 
 describe('login', () => {
-  it('deve logar no Qtruck com sucesso', () => {
+  it('should login on Qtruck successfully', () => {
     const user = {
       name: 'Rodolfo',
       instagram: '@rodolfo',
@@ -13,7 +13,7 @@ describe('login', () => {
     mapPage.loggedUser(user.name)
   })
 
-  it('não deve logar com senha incorreta', () => {
+  it('must not log with invalid password', () => {
     const user = {
       instagram: '@rodolfo',
       password: '123456'
@@ -22,7 +22,7 @@ describe('login', () => {
     loginPage.modal.haveText('Credenciais inválidas, tente novamente!')
   })
 
-  it('não deve logar com instagram incorreto', () => {
+  it('must not log with invalid instagram', () => {
     const user = {
       instagram: '@not-a-user',
       password: '1234senha'
@@ -31,7 +31,7 @@ describe('login', () => {
     loginPage.modal.haveText('Credenciais inválidas, tente novamente!')
   })
   
-  it('instagram deve ser obrigatório', ()=>{
+  it('instagram must be a required field', ()=>{
     const user = {
       password: '1234senha'
     }
@@ -39,7 +39,7 @@ describe('login', () => {
     loginPage.modal.haveText('Por favor, informe o seu código do Instagram!')
   })
 
-  it('senha deve ser obrigatória', ()=>{
+  it('password must be a required field', ()=>{
     const user = {
       instagram: '@rodolfo'
     }
@@ -47,7 +47,7 @@ describe('login', () => {
     loginPage.modal.haveText('Por favor, informe a sua senha secreta!')
   })
 
-  it('todos os campos devem ser obrigatórios', ()=>{
+  it('all field must be required', ()=>{
     loginPage.go()
     loginPage.submit()
     loginPage.modal.haveText('Por favor, informe suas credenciais!')

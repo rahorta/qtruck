@@ -1,14 +1,15 @@
 import signupPage from '../support/pages/Signup'
 
 describe('Signup', () => {
-    it('deve cadastrar novo usuário', () => {
+    it('should create a new user', () => {
         const user = {
             name: "Ronaldo Fenomeno",
             instagram: "@ronaldo9",
             password: 'pwd123'
         }
 
-        /* cy.deleteMany({instagram: user.instagram}, { collection: 'users'}).then(res => { 
+        /* DELETING DIRECTLY INTO THE DATA BASE
+        cy.deleteMany({instagram: user.instagram}, { collection: 'users'}).then(res => { 
             cy.log(res); 
         }) */
 
@@ -19,7 +20,7 @@ describe('Signup', () => {
 
     })
 
-    it('não deve cadasstrar com instagram duplicado', () => {
+    it('must not allow using an already registered instagram', () => {
         const user = {
             name: 'Zidane',
             instagram: '@zidane',
