@@ -33,6 +33,6 @@ describe('Food Trucks Reviews', ()=>{
         mapPage.goToFoodtruck(foodtruck.name)
         foodTruckPage.addReview(review)
 
-        
+        foodTruckPage.checkReview(user, review)
     })
 })
